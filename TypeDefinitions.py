@@ -1,10 +1,10 @@
 class Node:
     def __init__(wordTuple):
         # (word, pos) tuple, where word is the word as a string
-        # and pos is the part of speech as an enum
+        # and pos is the part of speech as an int (see Utils.PosToInt)
         # in a graph, there should be at most one node with a given
         # (word, pos) tuple
-        wordTuple   
+        wordTuple
 
         # list of (node, probability) tuples, where probability 
         # is a float/number from 0 to 1
