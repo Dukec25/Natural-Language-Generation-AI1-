@@ -37,6 +37,7 @@ posToIntMap = {
     # additional ones not found in http://www.winwaed.com/blog/2011/11/08/part-of-speech-tags/
     "SYM" : 36,
     "-LRB-" : 37,
+    "-RRB-" : 38,
 }
 
 def PosToInt(pos):
