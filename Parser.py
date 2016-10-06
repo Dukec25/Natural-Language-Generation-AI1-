@@ -79,7 +79,7 @@ def parse(graph):
             lookUp[(secondWord, secPos)].successorList.append((Node(secondWord, 
                             secPos), probability));
 
-        import pdb; pdb.set_trace();
+        # import pdb; pdb.set_trace();
         print(line);
  
 
