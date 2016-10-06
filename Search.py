@@ -1,5 +1,6 @@
 from TypeDefinitions import Node, Sequence
 from Utils import PosToInt
+import Parser
 
 import queue
 
@@ -7,7 +8,7 @@ def generate(startingWord, sentenceSpec, graph):
     """Returns a string (not necessarily one line) with the following information:
     1. the highest-probability sentence found
     2. the number of nodes (i.e. word sequences) considerd during the search"""
-    nodeMap = parse(graph)
+    nodeMap = Parser.parse(graph)
 
     sentenceSpecAsInts = [PosToInt(pos) for pos in sentenceSpec]
 
@@ -49,5 +50,11 @@ def generate(startingWord, sentenceSpec, graph):
                     else: # not nextWordIsLast
                         exploreQueue.put_nowait(copiedSequence)
                 
+    return currBestSentence # TODO testing, return string later?
 
+def test(filename="input.txt"):
+    file = open(filename, "r")
+    text = file.read()
+    sentenceSpec1 = ['NNP', 'VBD', 'DT', 'NN']
+    return generate('hans', sentenceSpec1, text)
 
