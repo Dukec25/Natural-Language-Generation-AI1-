@@ -28,7 +28,6 @@ def parse(graph):
             lookUp[(secondWord, secPos)].successorList.append((Node(secondWord, 
                             secPos), probability));
 
-        print(line);
     return lookUp;
  
 
