@@ -45,3 +45,20 @@ def PosToInt(pos):
     if pos not in posToIntMap:
         raise Exception("Unrecognized part of word: " + pos)
     return posToIntMap[pos]
+
+# function to extract POS's from the input file. Buggy? Might not need?
+def extract():
+    file = open("input.txt", "r")
+    text = file.read()
+    splitText = graph.split("\n")
+
+    posSet = set()
+    for line in splitText:
+        splitLine = line.split("/");
+        firstPos = splitLine[1];
+        posSet.add(firstPos)
+        secondPos = splitLine[4]
+        posSet.add(secondPos)
+
+    for pos in posSet:
+        print(pos)
