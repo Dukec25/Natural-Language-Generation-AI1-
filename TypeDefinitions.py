@@ -19,7 +19,7 @@ class Sequence:
 
     def addNode(self, node, edgeProbability):
         self.nodes.append(node)
-        self.probability *= probability
+        self.probability *= edgeProbability
 
     def copy(self):
         """Returns a copy of self, with a copied list pointing to the
@@ -28,3 +28,15 @@ class Sequence:
         theCopy.nodes = copy.copy(self.nodes)
         theCopy.probability = self.probability
         return theCopy
+
+    def getString(self):
+        string = ""
+        first = True
+        for node in self.nodes:
+            if first:
+                first = False
+            else:
+                string += " "
+            string += node.wordTuple[0]
+
+        return string
