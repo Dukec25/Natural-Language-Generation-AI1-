@@ -2,10 +2,10 @@ from TypeDefinitions import Node, Sequence
 from Utils import PosToInt
 import Parser
 
-import operator
 import queue
+from collections import deque
 
-def generate(startingWord, sentenceSpec, graph):
+def generate(startingWord, sentenceSpec, graph, searchStrategy='BFS'):
     """Prints a string (not necessarily one line) with the following information:
     1. the highest-probability sentence found
     2. the number of nodes (i.e. word sequences) considerd during the search"""
@@ -17,16 +17,22 @@ def generate(startingWord, sentenceSpec, graph):
 
     # represents sequences to explore, contains only sequences that currently
     # satisfy the sentenceSpec
-    exploreQueue = queue.Queue()    
-    exploreQueue.put_nowait(Sequence(startNode))
+    # depending on whether DFS or BFS is used, may use pop() or popleft() to
+    # simulate stack or queue, respectively
+    exploreStructure = deque()
+    exploreStructure.append(Sequence(startNode))
 
     exploreCount = 0
     currBestSentence = None
-    while not exploreQueue.empty():
+    while exploreStructure: # not empty
         # rather than checking for the goal state when popping from the 
         # explore data structure, we check before we're about to put it in,
         # to populate currBestSentence more quickly
-        currSequence = exploreQueue.get_nowait()
+        
+        if searchStrategy == 'BFS':
+            currSequence = exploreStructure.popleft()
+        elif searchStrategy == 'DFS':
+            currSequence = exploreStructure.pop()
         exploreCount += 1
         currNode = currSequence.nodes[-1]
         nextIdxInSentence = len(currSequence.nodes)
@@ -49,7 +55,7 @@ def generate(startingWord, sentenceSpec, graph):
                     if nextWordIsLast:
                         currBestSentence = copiedSequence
                     else: # not nextWordIsLast
-                        exploreQueue.put_nowait(copiedSequence)
+                        exploreStructure.append(copiedSequence)
           
     outputString = '"' + currBestSentence.getString() + '"' \
                    + " with probability " + str(currBestSentence.probability)
@@ -67,33 +73,35 @@ def test(filename="input.txt"):
             string += ", '" + spec + "'"
         return string
 
+    searchStrategy = 'DFS'
+
     print("====================================")
     sentenceSpec = ['NNP', 'VBD', 'DT', 'NN']
     startingWord = 'hans'
     print("output for starting word: ", startingWord, "\nand specs:", sentenceSpecToString(sentenceSpec))
-    generate(startingWord, sentenceSpec, text)
+    generate(startingWord, sentenceSpec, text, searchStrategy)
 
     # part 2 tests:
     print("====================================")
     sentenceSpec = ['NNP', 'VBD', 'DT', 'NN']
     startingWord = 'benjamin'
     print("output for starting word: ", startingWord, "\nand specs:", sentenceSpecToString(sentenceSpec))
-    generate(startingWord, sentenceSpec, text)
+    generate(startingWord, sentenceSpec, text, searchStrategy)
 
     print("====================================")
     sentenceSpec = ['DT', 'NN', 'VBD', 'NNP']
     startingWord = 'a'
     print("output for starting word: ", startingWord, "\nand specs:", sentenceSpecToString(sentenceSpec))
-    generate(startingWord, sentenceSpec, text)
+    generate(startingWord, sentenceSpec, text, searchStrategy)
 
     print("====================================")
     sentenceSpec = ['NNP', 'VBD', 'DT', 'JJS', 'NN']
     startingWord = 'benjamin'
     print("output for starting word: ", startingWord, "\nand specs:", sentenceSpecToString(sentenceSpec))
-    generate(startingWord, sentenceSpec, text)
+    generate(startingWord, sentenceSpec, text, searchStrategy)
 
     print("====================================")
     sentenceSpec = ['DT', 'NN', 'VBD', 'NNP', 'IN', 'DT', 'NN']
     startingWord = 'a'
     print("output for starting word: ", startingWord, "\nand specs:", sentenceSpecToString(sentenceSpec))
-    generate(startingWord, sentenceSpec, text)
+    generate(startingWord, sentenceSpec, text, searchStrategy)

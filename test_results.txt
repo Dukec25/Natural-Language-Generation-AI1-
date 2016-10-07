@@ -1,0 +1,58 @@
+/////////////////////////////////////////////////
+// results with BFS
+
+====================================
+output for starting word:  hans 
+and specs: 'NNP', 'VBD', 'DT', 'NN'
+"hans found a man" with probability 0.0003416856492027335
+Total nodes considered:  38
+====================================
+output for starting word:  benjamin 
+and specs: 'NNP', 'VBD', 'DT', 'NN'
+"benjamin saw the apple" with probability 0.0012112403100775191
+Total nodes considered:  10
+====================================
+output for starting word:  a 
+and specs: 'DT', 'NN', 'VBD', 'NNP'
+"a son thanked god" with probability 0.0001320524248126506
+Total nodes considered:  295
+====================================
+output for starting word:  benjamin 
+and specs: 'NNP', 'VBD', 'DT', 'JJS', 'NN'
+"benjamin saw the youngest son" with probability 0.00012705317937876075
+Total nodes considered:  42
+====================================
+output for starting word:  a 
+and specs: 'DT', 'NN', 'VBD', 'NNP', 'IN', 'DT', 'NN'
+"a son thanked god for the apple" with probability 7.088569976234052e-08
+Total nodes considered:  582
+
+
+/////////////////////////////////////////////////
+// results with DFS
+
+====================================
+output for starting word:  hans 
+and specs: 'NNP', 'VBD', 'DT', 'NN'
+"hans found a man" with probability 0.0003416856492027335
+Total nodes considered:  35
+====================================
+output for starting word:  benjamin 
+and specs: 'NNP', 'VBD', 'DT', 'NN'
+"benjamin saw the apple" with probability 0.0012112403100775191
+Total nodes considered:  10
+====================================
+output for starting word:  a 
+and specs: 'DT', 'NN', 'VBD', 'NNP'
+"a son thanked god" with probability 0.0001320524248126506
+Total nodes considered:  295
+====================================
+output for starting word:  benjamin 
+and specs: 'NNP', 'VBD', 'DT', 'JJS', 'NN'
+"benjamin saw the youngest son" with probability 0.00012705317937876075
+Total nodes considered:  29
+====================================
+output for starting word:  a 
+and specs: 'DT', 'NN', 'VBD', 'NNP', 'IN', 'DT', 'NN'
+"a son thanked god for the apple" with probability 7.088569976234052e-08
+Total nodes considered:  455
