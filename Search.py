@@ -29,7 +29,7 @@ def generate(startingWord, sentenceSpec, graph):
         currSequence = exploreQueue.get_nowait()
         exploreCount += 1
         currNode = currSequence.nodes[-1]
-        nextIdxInSentence = currSequence.nodes.count()
+        nextIdxInSentence = len(currSequence.nodes)
         nextPosAsInt = sentenceSpecAsInts[nextIdxInSentence]
         nextWordIsLast = (nextIdxInSentence == len(sentenceSpecAsInts) - 1)
 
@@ -39,7 +39,7 @@ def generate(startingWord, sentenceSpec, graph):
             raise Exception("Unexpected! Goal state reached from currSequence!")
 
         for childNode, edgeProbability in currNode.successorList:
-            if childNode[1] == nextPosAsInt:
+            if childNode.wordTuple[1] == nextPosAsInt:
                 copiedSequence = currSequence.copy()
                 copiedSequence.addNode(childNode, edgeProbability)
 
