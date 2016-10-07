@@ -6,7 +6,7 @@ import operator
 import queue
 
 def generate(startingWord, sentenceSpec, graph):
-    """Returns a string (not necessarily one line) with the following information:
+    """Prints a string (not necessarily one line) with the following information:
     1. the highest-probability sentence found
     2. the number of nodes (i.e. word sequences) considerd during the search"""
     nodeMap = Parser.parse(graph)
@@ -50,48 +50,25 @@ def generate(startingWord, sentenceSpec, graph):
                         currBestSentence = copiedSequence
                     else: # not nextWordIsLast
                         exploreQueue.put_nowait(copiedSequence)
-                
-    return currBestSentence # TODO testing, return string later?
+          
+    outputString = '"' + currBestSentence.getString() + '"' \
+                   + " with probability " + str(currBestSentence.probability)
+    print(outputString)
+    print("Total nodes considered: ", exploreCount)
 
+# kind of like the main function to run for test results
 def test(filename="input.txt"):
     file = open(filename, "r")
     text = file.read()
+
+    def sentenceSpecToString(sentenceSpec):
+        string = "'" + sentenceSpec[0] + "'"
+        for spec in sentenceSpec[1:]:
+            string = ", '" + spec + "'"
+        return string
+
+    print("====================================")
     sentenceSpec1 = ['NNP', 'VBD', 'DT', 'NN']
-    return generate('hans', sentenceSpec1, text)
-
-
-def getKey(item):
-    return item[1];
-
-""" untested 
-# always choose the word of right type of POS and have the highest possibility
-def heuristic(startNode, sentenceSpec, graph):
-    index = 1; # current word 
-    "sort the list so highest probabilities goes first"
-    result = [];
-    result.append(startNode.wordTuple[0]);
-    probability = 1;
-    currentNode = startNode;
-    success = False; 
-
-    while( currentNode != None ) 
-        sorted(startNode.successorList, key=getKey, reverse=true); 
-        for pairedElement in startNode.successorList:
-            if pairedElement.wordTuple[1] == sentenceSpec[index]:
-                    if (index == len(sentenceSpec) -1):
-                        success = True;
-                        currentNode = None;
-                        break; 
-                    index = index + 1;
-                    result.append(" " + pairedElement.wordTuple[0]);
-                    probability = probability * currentNode.successorList[1];
-                    currentNode = pairedElement; 
-                    continue;
-        break; 
-
-    if (success):
-        #print out stuff
-    else
-        #print out stuff 
-"""
-
+    startingWord1 = 'hans'
+    print("output for starting word: ", startingWord1, sentenceSpecToString(sentenceSpec1))
+    generate(startingWord1, sentenceSpec1, text)
