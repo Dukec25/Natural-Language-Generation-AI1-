@@ -64,11 +64,36 @@ def test(filename="input.txt"):
     def sentenceSpecToString(sentenceSpec):
         string = "'" + sentenceSpec[0] + "'"
         for spec in sentenceSpec[1:]:
-            string = ", '" + spec + "'"
+            string += ", '" + spec + "'"
         return string
 
     print("====================================")
-    sentenceSpec1 = ['NNP', 'VBD', 'DT', 'NN']
-    startingWord1 = 'hans'
-    print("output for starting word: ", startingWord1, sentenceSpecToString(sentenceSpec1))
-    generate(startingWord1, sentenceSpec1, text)
+    sentenceSpec = ['NNP', 'VBD', 'DT', 'NN']
+    startingWord = 'hans'
+    print("output for starting word: ", startingWord, "\nand specs:", sentenceSpecToString(sentenceSpec))
+    generate(startingWord, sentenceSpec, text)
+
+    # part 2 tests:
+    print("====================================")
+    sentenceSpec = ['NNP', 'VBD', 'DT', 'NN']
+    startingWord = 'benjamin'
+    print("output for starting word: ", startingWord, "\nand specs:", sentenceSpecToString(sentenceSpec))
+    generate(startingWord, sentenceSpec, text)
+
+    print("====================================")
+    sentenceSpec = ['DT', 'NN', 'VBD', 'NNP']
+    startingWord = 'a'
+    print("output for starting word: ", startingWord, "\nand specs:", sentenceSpecToString(sentenceSpec))
+    generate(startingWord, sentenceSpec, text)
+
+    print("====================================")
+    sentenceSpec = ['NNP', 'VBD', 'DT', 'JJS', 'NN']
+    startingWord = 'benjamin'
+    print("output for starting word: ", startingWord, "\nand specs:", sentenceSpecToString(sentenceSpec))
+    generate(startingWord, sentenceSpec, text)
+
+    print("====================================")
+    sentenceSpec = ['DT', 'NN', 'VBD', 'NNP', 'IN', 'DT', 'NN']
+    startingWord = 'a'
+    print("output for starting word: ", startingWord, "\nand specs:", sentenceSpecToString(sentenceSpec))
+    generate(startingWord, sentenceSpec, text)
